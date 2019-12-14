@@ -8,64 +8,89 @@ namespace CoverageExtractor
 {
     public class XmlDfs : IDisposable
     {
-        [NotNull] private readonly StreamWriter myOutputGood;
-        [NotNull] private readonly StreamWriter myOutputBad;
+        [NotNull] private readonly StreamWriter myUsed;
+        [NotNull] private readonly StreamWriter myUnused;
         [NotNull] private readonly List<string> myCurrentName;
 
-        public XmlDfs([NotNull] StreamWriter writerGood, [NotNull] StreamWriter writerBad)
+        public XmlDfs([NotNull] StreamWriter used, [NotNull] StreamWriter unused)
         {
-            myOutputGood = writerGood;
-            myOutputBad = writerBad;
+            myUsed = used;
+            myUnused = unused;
             myCurrentName = new List<string>();
         }
 
-        private static bool CheckName(string name)
+        private static bool IsNamed(string name)
         {
-            return name == "Method" || name == "AnonymousMethod" || name == "Constructor" || name == "PropertyGetter" ||
-                   name == "PropertySetter";
+            return name == "Method" || name == "AnonymousMethod" || name == "Constructor" || name == "AutoProperty" ||
+                   name == "Event" || name == "InternalCompiledMethod";
+        }
+
+        private static bool IsUnnamed(string name)
+        {
+            return name == "PropertyGetter" ||
+                   name == "PropertySetter" ||
+                   name == "EventAdder" ||
+                   name == "EventRemover";
+        }
+
+        private static bool IsUseless(string name)
+        {
+            return name == "Root" || name == "xml" || name == "?xml" || name == "OwnCoverage" || name == "Assembly";
+        }
+
+        private static bool ShouldBeDisplayed(string name)
+        {
+            return IsNamed(name) || IsUnnamed(name);
         }
 
         private StreamWriter GetCoverStream([NotNull] XmlNode node)
         {
-            return int.Parse(node.Attributes?["CoveragePercent"].Value ?? "0") > 0 ? myOutputGood : myOutputBad;
+            return int.Parse(GetOrThrow(node, "CoveragePercent")) > 0 ? myUsed : myUnused;
+        }
+
+        private static string GetOrThrow([NotNull] XmlNode node, string attr)
+        {
+            return node.Attributes?[attr].Value ?? throw new XmlException("incorrect coverage");
         }
 
         public void Dfs(XmlNode node)
         {
-            if (node.Name == "PropertyGetter" || node.Name == "PropertySetter")
-            {
-                
-                myCurrentName.Add(node.Attributes?[0].Value);
-            }
-
-            if (CheckName(node.Name))
+            if (ShouldBeDisplayed(node.Name))
             {
                 var covered = GetCoverStream(node);
-                switch (node.Name)
+                myCurrentName.Add(IsNamed(node.Name) ? GetOrThrow(node, "Name") : node.Name);
+
+                foreach (var str in myCurrentName)
                 {
-                    case "Method":
-                    case "AnonymousMethod":
-                    case "Constructor":
-                    {
-                        
-                    }
-                    case "PropertyGetter":
-                    case "PropertySetter":
+                    covered.Write(str);
+                    covered.Write(".");
+                }
+
+                covered.Write("\n");
+            }
+            else
+            {
+                if (!IsUseless(node.Name))
+                {
+                    myCurrentName.Add(GetOrThrow(node, "Name"));
                 }
             }
-            
+
             foreach (XmlElement child in node)
             {
                 Dfs(child);
             }
 
-            myCurrentName.RemoveAt(myCurrentName.Count - 1);
+            if (!IsUseless(node.Name))
+            {
+                myCurrentName.RemoveAt(myCurrentName.Count - 1);
+            }
         }
 
         public void Dispose()
         {
-            myOutputBad.Dispose();
-            myOutputGood.Dispose();
+            myUnused.Dispose();
+            myUsed.Dispose();
         }
     }
 }

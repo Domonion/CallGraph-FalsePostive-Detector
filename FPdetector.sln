@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoverageExtractor", "CoverageExtractor\CoverageExtractor.csproj", "{05CBDC09-1753-4D88-AA02-668CDB717D3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Detector", "Detector\Detector.csproj", "{895B74BF-C445-4E72-9BA7-FE429A70F1A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{05CBDC09-1753-4D88-AA02-668CDB717D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05CBDC09-1753-4D88-AA02-668CDB717D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05CBDC09-1753-4D88-AA02-668CDB717D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{895B74BF-C445-4E72-9BA7-FE429A70F1A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{895B74BF-C445-4E72-9BA7-FE429A70F1A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{895B74BF-C445-4E72-9BA7-FE429A70F1A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{895B74BF-C445-4E72-9BA7-FE429A70F1A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
