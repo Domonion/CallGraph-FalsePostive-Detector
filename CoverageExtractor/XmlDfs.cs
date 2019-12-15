@@ -19,10 +19,15 @@ namespace CoverageExtractor
             myCurrentName = new List<string>();
         }
 
+        private static bool ShouldRemoveReturn(string name)
+        {
+            return name == "Method" || name == "AnonymousMethod" || name == "AutoProperty" ||
+                   name == "Event" || name == "InternalCompiledMethod" || name == "Property";
+        }
+
         private static bool IsNamed(string name)
         {
-            return name == "Method" || name == "AnonymousMethod" || name == "Constructor" || name == "AutoProperty" ||
-                   name == "Event" || name == "InternalCompiledMethod";
+            return ShouldRemoveReturn(name) || name == "Constructor";
         }
 
         private static bool IsUnnamed(string name)
@@ -50,7 +55,14 @@ namespace CoverageExtractor
 
         private static string GetOrThrow([NotNull] XmlNode node, string attr)
         {
-            return node.Attributes?[attr].Value ?? throw new XmlException("incorrect coverage");
+            var res = node.Attributes?[attr].Value ?? throw new XmlException("incorrect coverage");
+            if (ShouldRemoveReturn(node.Name) && attr == "Name")
+            {
+                var ind = res.LastIndexOf(":");
+                res = res.Remove(ind);
+            }
+
+            return res;
         }
 
         public void Dfs(XmlNode node)
@@ -60,10 +72,14 @@ namespace CoverageExtractor
                 var covered = GetCoverStream(node);
                 myCurrentName.Add(IsNamed(node.Name) ? GetOrThrow(node, "Name") : node.Name);
 
-                foreach (var str in myCurrentName)
+                for (var index = 0; index < myCurrentName.Count; index++)
                 {
+                    var str = myCurrentName[index];
                     covered.Write(str);
-                    covered.Write(".");
+                    if (index != myCurrentName.Count - 1)
+                    {
+                        covered.Write(".");
+                    }
                 }
 
                 covered.Write("\n");

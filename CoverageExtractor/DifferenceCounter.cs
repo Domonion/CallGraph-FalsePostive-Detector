@@ -34,10 +34,10 @@ namespace CoverageExtractor
             AssertExistence(unused);
             AssertExistence(used);
             
-            AssertExtension(expectedUnused, "gold");
-            AssertExtension(expectedUsed, "gold");
-            AssertExtension(used, "temp");
-            AssertExtension(unused, "temp");
+            AssertExtension(expectedUnused, ".gold");
+            AssertExtension(expectedUsed, ".gold");
+            AssertExtension(used, ".temp");
+            AssertExtension(unused, ".temp");
             
             FillSet(myExpectedUsed, expectedUsed);
             FillSet(myExpectedUnused, expectedUnused);

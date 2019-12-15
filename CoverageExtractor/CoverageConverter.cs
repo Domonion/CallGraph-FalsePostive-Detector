@@ -10,9 +10,9 @@ namespace CoverageExtractor
         {
             var document = new XmlDocument();
             AssertExistence(pathToXml);
-            AssertExtension(pathToXml, "xml");
-            AssertExtension(pathUsed, "gold");
-            AssertExtension(pathUnused, "gold");
+            AssertExtension(pathToXml, ".xml");
+            AssertExtension(pathUsed, ".gold");
+            AssertExtension(pathUnused, ".gold");
             document.Load(pathToXml);
             var root = document.DocumentElement;
             using (StreamWriter streamUsed = File.CreateText(pathUsed), streamUnused = File.CreateText(pathUnused))
