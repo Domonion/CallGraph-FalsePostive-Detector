@@ -47,7 +47,7 @@ namespace CoverageExtractor
                 CheckContent(true, used, errorsWriter, unkownWriter);
                 CheckContent(false, unused, errorsWriter, unkownWriter);
                 statisticsWriter.WriteLine("Expected total: " + myExpectedTotal);
-                statisticsWriter.WriteLine("Data total: " + myTotal);
+                statisticsWriter.WriteLine("Input total: " + myTotal);
                 statisticsWriter.WriteLine("Ok: " + myOkey);
                 statisticsWriter.WriteLine("False positives: " + myFalsePositive);
                 statisticsWriter.WriteLine("False negatives: " + myFalseNegative);

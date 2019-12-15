@@ -8,7 +8,7 @@ namespace Detector
     {
         private static void PrintHelp()
         {
-            Console.WriteLine("help xml diff [exit q q!]");
+            Console.WriteLine("help xml diff [exit q q!] clear");
         }
 
         public static void Main()
@@ -17,7 +17,7 @@ namespace Detector
             while (done)
             {
                 Console.Write(":");
-                var currentCommand = Console.ReadLine();
+                var currentCommand = Console.ReadLine().Trim();
                 switch (currentCommand)
                 {
                     case "exit":
@@ -78,6 +78,11 @@ namespace Detector
                             Console.WriteLine(e);
                         }
 
+                        break;
+                    }
+                    case "clear":
+                    {
+                        Console.Clear();
                         break;
                     }
                     case "":
