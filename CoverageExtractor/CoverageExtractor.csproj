@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="CoverageConverter.cs" />
     <Compile Include="DifferenceCounter.cs" />
+    <Compile Include="DotReductor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="XmlDfs.cs" />
