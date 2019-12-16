@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Xml;
 using JetBrains.Annotations;
 
@@ -74,7 +75,8 @@ namespace CoverageExtractor
 
                 for (var index = 0; index < myCurrentName.Count; index++)
                 {
-                    var str = myCurrentName[index];
+                    var str = Regex.Replace(Regex.Replace(myCurrentName[index], @"\bSystem.String\b", "string"),
+                        @"\bSystem.Int32\b", "int");
                     covered.Write(str);
                     if (index != myCurrentName.Count - 1)
                     {
