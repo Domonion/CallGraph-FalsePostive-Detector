@@ -65,8 +65,8 @@ namespace Detector
                         {
                             try
                             {
-//                                FromXmlToTxt(list[0], list[1], list[2]);
-                                FromXmlToTxt(pathToXml, expectedUsed, expectedUnused);
+                                FromXmlToTxt(list[0], list[1], list[2]);
+//                                FromXmlToTxt(pathToXml, expectedUsed, expectedUnused);
                             }
                             catch (Exception e)
                             {
@@ -89,14 +89,14 @@ namespace Detector
                         {
                             try
                             {
-//                                FromXmlToTxt(Path.Combine(list[0], "snapshot.xml"), Path.Combine(list[0], "used.gold"), Path.Combine(list[0], "unused.gold"));
-//                                diff.CalculateError(Path.Combine(list[0], "used.gold"), Path.Combine(list[0], "unused.gold"), Path.Combine(list[0], "used.temp"),
-//                                    Path.Combine(list[0], "unused.temp"), Path.Combine(list[0], "errors.txt"), Path.Combine(list[0], "stats.txt"),
-//                                    Path.Combine(list[0], "unknown.txt"));
-                                FromXmlToTxt(Path.Combine(dir, "snapshot.xml"), Path.Combine(dir, "used.gold"), Path.Combine(dir, "unused.gold"));
-                                diff.CalculateError(Path.Combine(dir, "used.gold"), Path.Combine(dir, "unused.gold"), Path.Combine(dir, "used.temp"),
-                                    Path.Combine(dir, "unused.temp"), Path.Combine(dir, "errors.txt"), Path.Combine(dir, "stats.txt"),
-                                    Path.Combine(dir, "unknown.txt"));
+                                FromXmlToTxt(Path.Combine(list[0], "snapshot.xml"), Path.Combine(list[0], "used.gold"), Path.Combine(list[0], "unused.gold"));
+                                diff.CalculateError(Path.Combine(list[0], "used.gold"), Path.Combine(list[0], "unused.gold"), Path.Combine(list[0], "used.temp"),
+                                    Path.Combine(list[0], "unused.temp"), Path.Combine(list[0], "errors.txt"), Path.Combine(list[0], "stats.txt"),
+                                    Path.Combine(list[0], "unknown.txt"));
+//                                FromXmlToTxt(Path.Combine(dir, "snapshot.xml"), Path.Combine(dir, "used.gold"), Path.Combine(dir, "unused.gold"));
+//                                diff.CalculateError(Path.Combine(dir, "used.gold"), Path.Combine(dir, "unused.gold"), Path.Combine(dir, "used.temp"),
+//                                    Path.Combine(dir, "unused.temp"), Path.Combine(dir, "errors.txt"), Path.Combine(dir, "stats.txt"),
+//                                    Path.Combine(dir, "unknown.txt"));
                             }
                             catch (Exception e)
                             {
@@ -129,8 +129,8 @@ namespace Detector
                         {
                             try
                             {
-                                diff.CalculateError(expectedUsed, expectedUnused, used, unused, errors, statistics, unknown);
-//                                diff.CalculateError(list[0], list[1], list[2], list[3], list[4], list[5], list[6]);
+//                                diff.CalculateError(expectedUsed, expectedUnused, used, unused, errors, statistics, unknown);
+                                diff.CalculateError(list[0], list[1], list[2], list[3], list[4], list[5], list[6]);
                             }
                             catch (Exception e)
                             {
