@@ -80,7 +80,7 @@ namespace CoverageExtractor
                 var forNext = now + pattern.Length - 1;
                 var next = FindNext(forNext);
                 var sb = new StringBuilder(myCurrentStr) {[next] = ')'};
-                sb.Replace(pattern, "(", now, now + pattern.Length);
+                sb.Replace(pattern, "(", now, pattern.Length);
                 myCurrentStr = sb.ToString();
             }
         }
