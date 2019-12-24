@@ -65,12 +65,12 @@ namespace CoverageExtractor
             {
                 CheckContent(true, used);
                 CheckContent(false, unused);
-                statisticsWriter.WriteLine("Gold total: " + myExpectedTotal.Count);
-                statisticsWriter.WriteLine("Input total: " + myTotal.Count);
-                statisticsWriter.WriteLine("Ok: " + myOkey.Count);
+                statisticsWriter.WriteLine("Number of elements from dotCover: " + myExpectedTotal.Count);
+                statisticsWriter.WriteLine("Methods only from CallGraph: " + myTotal.Count);
+                statisticsWriter.WriteLine(": " + myOkey.Count);
                 statisticsWriter.WriteLine("False positives: " + myFalsePositive.Count);
                 statisticsWriter.WriteLine("False negatives: " + myFalseNegative.Count);
-                statisticsWriter.WriteLine("Unknown: " + myUnknown.Count);
+                statisticsWriter.WriteLine("Unknown methods: " + myUnknown.Count);
                 var otstup = new string(' ', 10);
                 statisticsWriter.WriteLine("Gold data taken from:");
                 statisticsWriter.WriteLine(otstup + expectedUsed);
