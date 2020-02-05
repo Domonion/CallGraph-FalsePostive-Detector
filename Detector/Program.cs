@@ -146,10 +146,6 @@ namespace Detector
                         last.Execute();
                         break;
                     }
-                    case "":
-                    {
-                        break;
-                    }
                     default:
                     {
                         last = new Command(null, list => Console.WriteLine("Command not recognized, type help to list available commands"));
